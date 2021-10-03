@@ -1,0 +1,20 @@
+---
+- hosts: all
+  gather_facts: yes
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: stopping previous container
+            shell: docker container stop web_server
+
+          - name: removing previous containers
+            shell: docker container rm  web_server
+
+          - name: removing previous image
+            shell: docker image rmi pranavkp61/docker_job
+
+          - name: creating docker container
+            shell: docker container run -idt --name web_server -p 8080:80 pranavkp61/docker_job
+
+~
