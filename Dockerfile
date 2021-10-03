@@ -7,7 +7,7 @@ ADD https://www.free-css.com/assets/files/free-css-templates/download/page270/un
 WORKDIR /var/www/html
 RUN unzip univers.zip
 RUN cp -rvf univers/* .
-RUN rm -rf univers univers.zip 
+RUN rm -rf univers univers.zip
 CMD ["/usr/sbin/httpd", "-D",  "FOREGROUND"]
 EXPOSE 80
 
