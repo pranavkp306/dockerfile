@@ -1,0 +1,59 @@
+ 
+Source Code Management
+ None
+ Git
+Repositories
+Repository URL
+https://github.com/pranavkp306/dockerfile.git
+
+
+
+Build
+Send files or execute commands over SSH
+SSH Server
+Name
+Jenkins
+Exec command
+echo "############################################"
+
+rsync -avh  /var/lib/jenkins/workspace/docker_job/Dockerfile  ansible@172.31.26.122:/home/ansible/docker/
+
+echo "############################################"
+
+ 
+ 
+Send files or execute commands over SSH
+SSH Server
+Name
+Ansible
+One or more fields in this block have been edited. 
+Exec command
+echo "############################################"
+
+cd /home/ansible/docker
+sudo docker image build -t $JOB_NAME:v1.$BUILD_ID .
+sudo docker image tag $JOB_NAME:v1.$BUILD_ID pranavkp61/$JOB_NAME:v1.$BUILD_ID
+sudo docker image tag $JOB_NAME:v1.$BUILD_ID pranavkp61/$JOB_NAME:latest
+sudo docker image push pranavkp61/$JOB_NAME:v1.$BUILD_ID
+sudo docker image push pranavkp61/$JOB_NAME:latest
+sudo docker image rmi  $JOB_NAME:v1.$BUILD_ID pranavkp61/$JOB_NAME:v1.$BUILD_ID pranavkp61/$JOB_NAME:latest
+
+echo "############################################"
+
+
+
+ 
+Post-build Actions
+
+Send build artifacts over SSH
+
+SSH Server
+Name : Ansible
+One or more fields in this block have been edited. 
+Exec command
+echo "############################################"
+
+ansible-playbook /codes/test.yml
+
+echo "############################################"
+
