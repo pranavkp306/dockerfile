@@ -16,5 +16,3 @@
 
           - name: creating docker container
             shell: docker container run -idt --name web_server -p 8080:80 pranavkp61/docker_job
-
-~
